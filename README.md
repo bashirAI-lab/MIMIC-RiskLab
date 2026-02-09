@@ -1,0 +1,82 @@
+# MIMIC-III Diagnostic System
+
+A comprehensive medical diagnostic system built on the MIMIC-III Clinical Database. This project ingests patient data, trains a Machine Learning model to predict mortality risk, and exposes the model via a Flask API.
+
+## 📌 Features
+*   **Data Pipeline**: Automated extraction, cleaning, and merging of MIMIC-III ADMISSIONS, PATIENTS, and LABEVENTS.
+*   **Machine Learning Model**: Scikit-Learn Random Forest Classifier predicting Hospital Mortality Flag.
+*   **Three-Tier Risk System**: Real-time visualization categorizing risk into Low (<35%), Moderate (35-55%), and Critical (>55%) categories.
+*   **API**: RESTful endpoint `/diagnose` for real-time risk assessment.
+*   **Analytics**: Visualization of key correlations (Labs vs. Mortality).
+
+## 🚀 Installation
+
+### Prerequisites
+*   Python 3.10+
+*   MIMIC-III Dataset (Demo or Full) in `archive (3).zip` or compatible format.
+
+### Setup
+1.  **Clone**:
+    ```bash
+    git clone <repo_url>
+    cd MIMIC
+    ```
+2.  **Install Dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Data Setup**:
+    Ensure `archive (3).zip` is in the project root.
+
+## 🛠️ Usage
+
+### 1. Data Ingestion & Training
+Run the pipeline to extract data, preprocess, and train the model.
+```bash
+python src/preprocessing/etl.py
+python src/models/train.py
+```
+*   `etl.py`: Extracts CSVs to `data/raw`, cleans, creates `data/processed/train.csv`.
+*   `train.py`: Trains Scikit-Learn model, saves to `src/models/model.joblib` and scaler to `src/models/scaler.pkl`.
+
+### 2. Run API
+Start the Flask server:
+```bash
+python src/api/app.py
+```
+The API will run on `http://localhost:5000`.
+
+### 3. Test Diagnosis
+Send a POST request to `/diagnose`:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "age": 72,
+    "gender": "M",
+    "lab_count": 45,
+    "abnormal_count": 12,
+    "admission_type": "EMERGENCY"
+}' http://localhost:5000/diagnose
+```
+
+### 4. Generate Visualizations
+Create analysis charts in `output/`:
+```bash
+python src/visualization.py
+```
+
+## 📊 Model Performance (Demo Data)
+*   **Target**: In-Hospital Mortality (`HOSPITAL_EXPIRE_FLAG`)
+*   **Metrics**: Accuracy 80.7%, AUC ~0.64 (limited by small sample size).
+*   **Key Insight**: Higher abnormal lab counts correlate with increased mortality risk.
+
+## 📂 Project Structure
+```
+MIMIC/
+├── data/               # Raw and processed data
+├── src/
+│   ├── api/            # Flask App (Dashboard UI)
+│   ├── models/         # Training script & .joblib models
+│   └── preprocessing/  # ETL logic
+├── requirements.txt
+└── README.md
+```
