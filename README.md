@@ -2,6 +2,13 @@
 
 A comprehensive medical diagnostic system built on the MIMIC-III Clinical Database. This project ingests patient data, trains a Machine Learning model to predict mortality risk, and exposes the model via a Flask API.
 
+## 🔍 Quick Look
+
+| **Real-time Diagnostic UI** | **Risk Analysis Output** |
+| :---: | :---: |
+| ![Demo GIF Placeholder](path/to/demo.gif) | ![Risk Correlation](output/abnormal_labs_vs_mortality.png) |
+| *Interactive dashboard for real-time risk prediction.* | *Distribution of abnormal labs across mortality outcomes.* |
+
 ## 📌 Features
 *   **Data Pipeline**: Automated extraction, cleaning, and merging of MIMIC-III ADMISSIONS, PATIENTS, and LABEVENTS.
 *   **Machine Learning Model**: Scikit-Learn Random Forest Classifier predicting Hospital Mortality Flag.
@@ -68,6 +75,13 @@ python src/visualization.py
 *   **Target**: In-Hospital Mortality (`HOSPITAL_EXPIRE_FLAG`)
 *   **Metrics**: Accuracy 80.7%, AUC ~0.64 (limited by small sample size).
 *   **Key Insight**: Higher abnormal lab counts correlate with increased mortality risk.
+
+### 📊 Key Insights (Side-by-Side)
+
+| Correlation Heatmap | Feature vs. Outcome |
+| :---: | :---: |
+| ![Correlation Matrix](output/correlation_matrix.png) | ![Labs vs Mortality](output/labs_vs_mortality.png) |
+| *Strong correlations identified between specific lab trends and patient outcomes.* | *Direct comparison of lab event frequency against hospital expiration flags.* |
 
 ## 📂 Project Structure
 ```
