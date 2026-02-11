@@ -12,7 +12,7 @@ Predictive modeling in intensive care settings is essential for improving clinic
 | ![Demo GIF Placeholder](path/to/demo.gif) | ![Risk Correlation](output/abnormal_labs_vs_mortality.png) |
 | *Interactive dashboard for real-time risk prediction.* | *Distribution of abnormal labs across mortality outcomes.* |
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bashirAI-lab/MIMIC-RiskLab/blob/main/notebook.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bashirAI-lab/MIMIC-RiskLab/blob/main/demo.ipynb)
 
 ## 📌 Features
 *   **Data Pipeline**: Automated extraction, cleaning, and merging of MIMIC-III ADMISSIONS, PATIENTS, and LABEVENTS.
@@ -81,6 +81,9 @@ python src/visualization.py
 *   **Metrics**: Accuracy 80.7%, AUC ~0.64 (limited by small sample size).
 *   **Key Insight**: Higher abnormal lab counts correlate with increased mortality risk.
 
+## 🩺 Clinical Motivation
+MIMIC-RiskLab aims to reduce hospital mortality by identifying high-risk patients through automated lab result analysis. By providing data-driven insights, the system assists clinical teams in managing patient acuity more effectively.
+
 ## 📈 Data Insights (Analysis)
 A statistical evaluation of the clinical data reveals a strong positive correlation between the frequency of **'abnormal' lab events** and hospital mortality rates. Patients with elevated cumulative counts of critical markers exhibit a significantly higher risk profile. This suggests that the frequency of deviations from normal laboratory ranges is a high-fidelity predictor of systemic instability in acute care settings.
 
@@ -89,7 +92,7 @@ A statistical evaluation of the clinical data reveals a strong positive correlat
 | Correlation Heatmap | Feature vs. Outcome |
 | :---: | :---: |
 | ![Correlation Matrix](output/correlation_matrix.png) | ![Labs vs Mortality](output/labs_vs_mortality.png) |
-| *Strong correlations identified between specific lab trends and patient outcomes.* | *Direct comparison of lab event frequency against hospital expiration flags.* |
+| *Strong correlations identified between specific lab trends and patient outcomes.* | *Distribution of lab events by mortality outcome.* |
 
 ## 📂 Project Structure
 ```
