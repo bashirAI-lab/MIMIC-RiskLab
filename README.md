@@ -2,9 +2,6 @@
 
 A comprehensive medical diagnostic system built on the MIMIC-III Clinical Database. This project ingests patient data, trains a Machine Learning model to predict mortality risk, and exposes the model via a Flask API.
 
-## 🩺 Clinical Motivation
-Predictive modeling in intensive care settings is essential for improving clinical outcomes and optimizing hospital resources. This project leverages the **MIMIC-III Clinical Database** to identify high-risk laboratory trends that correlate with in-hospital mortality. By analyzing cumulative lab abnormalities, the system provides a data-driven framework to assist clinicians in prioritizing high-acuity patients.
-
 ## 🔍 Quick Look
 
 | **Real-time Diagnostic UI** | **Risk Analysis Output** |
@@ -81,8 +78,8 @@ python src/visualization.py
 *   **Metrics**: Accuracy 80.7%, AUC ~0.64 (limited by small sample size).
 *   **Key Insight**: Higher abnormal lab counts correlate with increased mortality risk.
 
-## 🩺 Clinical Motivation
-MIMIC-RiskLab aims to reduce hospital mortality by identifying high-risk patients through automated lab result analysis. By providing data-driven insights, the system assists clinical teams in managing patient acuity more effectively.
+## 🏥 Clinical Motivation
+MIMIC-RiskLab aims to reduce hospital mortality by identifying high-risk patients through automated lab result analysis. By providing data-driven insights—specifically identifying **Age** and **Abnormal Lab Counts** as primary predictors—the system assists clinical teams in managing patient acuity more effectively.
 
 ## 📈 Data Insights (Analysis)
 A statistical evaluation of the clinical data reveals a strong positive correlation between the frequency of **'abnormal' lab events** and hospital mortality rates. Patients with elevated cumulative counts of critical markers exhibit a significantly higher risk profile. This suggests that the frequency of deviations from normal laboratory ranges is a high-fidelity predictor of systemic instability in acute care settings.
@@ -92,7 +89,7 @@ A statistical evaluation of the clinical data reveals a strong positive correlat
 | Correlation Heatmap | Feature vs. Outcome |
 | :---: | :---: |
 | ![Correlation Matrix](output/correlation_matrix.png) | ![Labs vs Mortality](output/labs_vs_mortality.png) |
-| *Strong correlations identified between specific lab trends and patient outcomes.* | *Distribution of lab events by mortality outcome.* |
+| *Strong correlations identified between specific lab trends and patient outcomes.* | *Distribution of lab events by mortality outcome. Analysis identifies **Age** and **Abnormal Lab Counts** as the clinical features most predictive of patient risk.* |
 
 ## 📂 Project Structure
 ```
