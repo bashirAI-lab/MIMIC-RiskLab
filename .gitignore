@@ -9,7 +9,6 @@ __pycache__/
 .sqlite
 *.zip
 data/
-output/
 .DS_Store
 .vscode/
 .idea/

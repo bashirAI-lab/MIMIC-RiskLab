@@ -87,6 +87,7 @@ python src/visualization.py
 ```
 MIMIC/
 ├── data/               # Raw and processed data
+├── output/             # Generated visualizations
 ├── src/
 │   ├── api/            # Flask App (Dashboard UI)
 │   ├── models/         # Training script & .joblib models
