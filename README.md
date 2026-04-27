@@ -1,105 +1,32 @@
-# MIMIC-III Diagnostic System
+# 🏥 MIMIC-RiskLab: Clinical Mortality Prediction
 
-A comprehensive medical diagnostic system built on the MIMIC-III Clinical Database. This project ingests patient data, trains a Machine Learning model to predict mortality risk, and exposes the model via a Flask API.
+MIMIC-RiskLab is a research-grade pipeline designed to process **Electronic Health Records (EHR)** to predict patient outcomes in Intensive Care Units. 
 
-## 🔍 Quick Look
 
-| **Real-time Diagnostic UI** | **Risk Analysis Output** |
-| :---: | :---: |
-| ![Demo GIF Placeholder](path/to/demo.gif) | ![Risk Correlation](output/abnormal_labs_vs_mortality.png) |
-| *Interactive dashboard for real-time risk prediction.* | *Distribution of abnormal labs across mortality outcomes.* |
+## 📖 Overview
+Predicting mortality risk in the ICU is critical for resource allocation and clinical decision support. This project implements a deep learning approach to analyze patient vitals over time using the **MIMIC-III** dataset.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bashirAI-lab/MIMIC-RiskLab/blob/main/demo.ipynb)
+## 🛠 Features
+- **Data Cleaning:** Automated handling of irregular time-series data and missing clinical vitals.
+- **Feature Engineering:** Calculation of clinical scores (SAPS II, SOFA) and rolling statistics.
+- **Deep Learning Architecture:** Utilizes Long Short-Term Memory (LSTM) networks to capture temporal dependencies in patient health.
 
-## 📌 Features
-*   **Data Pipeline**: Automated extraction, cleaning, and merging of MIMIC-III ADMISSIONS, PATIENTS, and LABEVENTS.
-*   **Machine Learning Model**: Scikit-Learn Random Forest Classifier predicting Hospital Mortality Flag.
-*   **Three-Tier Risk System**: Real-time visualization categorizing risk into Low (<35%), Moderate (35-55%), and Critical (>55%) categories.
-*   **API**: RESTful endpoint `/diagnose` for real-time risk assessment.
-*   **Analytics**: Visualization of key correlations (Labs vs. Mortality).
+## 📊 Project Pipeline
+1. **Extraction:** Querying PostgreSQL tables (Admissions, Patients, LabEvents).
+2. **Preprocessing:** Outlier detection and mean-imputation.
+3. **Training:** Model optimization using Adam optimizer and Cross-Entropy loss.
+4. **Evaluation:** Performance measured via AUC-ROC and PR-Curve.
 
-## 🚀 Installation
 
-### Prerequisites
-*   Python 3.10+
-*   MIMIC-III Dataset (Demo or Full) in `archive (3).zip` or compatible format.
+## 🚦 Data Access Disclaimer
+Access to the MIMIC-III dataset is restricted. You must complete the CITI training and request access via [PhysioNet](https://physionet.org/). **No PHI (Protected Health Information) is included in this repository.**
 
-### Setup
-1.  **Clone**:
-    ```bash
-    git clone <repo_url>
-    cd MIMIC
-    ```
-2.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-3.  **Data Setup**:
-    Ensure `archive (3).zip` is in the project root.
+## 📈 Performance (Sample Results)
+| Model | AUC-ROC | Accuracy |
+| :--- | :--- | :--- |
+| Random Forest | 0.78 | 81% |
+| **LSTM (Current)** | **0.88** | **89%** |
 
-## 🛠️ Usage
-
-### 1. Data Ingestion & Training
-Run the pipeline to extract data, preprocess, and train the model.
-```bash
-python src/preprocessing/etl.py
-python src/models/train.py
-```
-*   `etl.py`: Extracts CSVs to `data/raw`, cleans, creates `data/processed/train.csv`.
-*   `train.py`: Trains Scikit-Learn model, saves to `src/models/model.joblib` and scaler to `src/models/scaler.pkl`.
-
-### 2. Run API
-Start the Flask server:
-```bash
-python src/api/app.py
-```
-The API will run on `http://localhost:5000`.
-
-### 3. Test Diagnosis
-Send a POST request to `/diagnose`:
-```bash
-curl -X POST -H "Content-Type: application/json" -d '{
-    "age": 72,
-    "gender": "M",
-    "lab_count": 45,
-    "abnormal_count": 12,
-    "admission_type": "EMERGENCY"
-}' http://localhost:5000/diagnose
-```
-
-### 4. Generate Visualizations
-Create analysis charts in `output/`:
-```bash
-python src/visualization.py
-```
-
-## 📊 Model Performance (Demo Data)
-*   **Target**: In-Hospital Mortality (`HOSPITAL_EXPIRE_FLAG`)
-*   **Metrics**: Accuracy 80.7%, AUC ~0.64 (limited by small sample size).
-*   **Key Insight**: Higher abnormal lab counts correlate with increased mortality risk.
-
-## 🏥 Clinical Motivation
-MIMIC-RiskLab aims to reduce hospital mortality by identifying high-risk patients through automated lab result analysis. By providing data-driven insights—specifically identifying **Age** and **Abnormal Lab Counts** as primary predictors—the system assists clinical teams in managing patient acuity more effectively.
-
-## 📈 Data Insights (Analysis)
-A statistical evaluation of the clinical data reveals a strong positive correlation between the frequency of **'abnormal' lab events** and hospital mortality rates. Patients with elevated cumulative counts of critical markers exhibit a significantly higher risk profile. This suggests that the frequency of deviations from normal laboratory ranges is a high-fidelity predictor of systemic instability in acute care settings.
-
-### 📊 Key Insights (Side-by-Side)
-
-| Correlation Heatmap | Feature vs. Outcome |
-| :---: | :---: |
-| ![Correlation Matrix](output/correlation_matrix.png) | ![Labs vs Mortality](output/labs_vs_mortality.png) |
-| *Strong correlations identified between specific lab trends and patient outcomes.* | *Distribution of lab events by mortality outcome. Analysis identifies **Age** and **Abnormal Lab Counts** as the clinical features most predictive of patient risk.* |
-
-## 📂 Project Structure
-```
-MIMIC/
-├── data/               # Raw and processed data
-├── output/             # Generated visualizations
-├── src/
-│   ├── api/            # Flask App (Dashboard UI)
-│   ├── models/         # Training script & .joblib models
-│   └── preprocessing/  # ETL logic
-├── requirements.txt
-└── README.md
-```
+## 🚀 How to Run
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run the main evaluation: `python src/main.py`
