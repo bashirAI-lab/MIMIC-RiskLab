@@ -4,7 +4,8 @@ MIMIC-RiskLab is a research-grade pipeline designed to process **Electronic Heal
 
 
 ## 📖 Overview
-Predicting mortality risk in the ICU is critical for resource allocation and clinical decision support. This project implements a deep learning approach to analyze patient vitals over time using the **MIMIC-III** dataset.
+Predicting mortality risk in the ICU is critical for resource allocation and clinical decision support. This project implements a deep learning approach to analyze patient vitals over time using the
+**MIMIC-III** dataset.
 [🚀 Launch Temporal Risk Dashboard](https://huggingface.co/spaces/abdalla6805/MIMIC-Risk-Predictor)
 
 ## 🛠 Features
